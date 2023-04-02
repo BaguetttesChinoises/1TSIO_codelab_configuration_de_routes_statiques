@@ -1,0 +1,290 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Configuration de routes statiques</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="configuration-de-routes-statiques"
+                  title="Configuration de routes statiques"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Questions de cours" duration="0">
+        <p>Sur votre feuille de rendu du TP, répondez aux questions suivantes : </p>
+<ol type="1" start="1">
+<li>Recopier la phrase vraie parmi les suivantes : </li>
+</ol>
+<ul>
+<li>Un hôte ne peut pas effectuer un ping vers lui-même</li>
+<li>Un hôte de destination distant se trouve sur le même réseau local que l&#39;hôte d&#39;envoi.</li>
+<li>Les hôtes locaux peuvent se joindre sans avoir besoin d&#39;un routeur.</li>
+<li>Le routage est activé sur les switchs pour découvrir le meilleur chemin vers une destination.</li>
+</ul>
+<ol type="1" start="2">
+<li>Recopier la phrase vraie parmi les suivantes : </li>
+</ol>
+<ul>
+<li>Une passerelle par défaut est requise pour envoyer des paquets à d&#39;autres hôtes du réseau local.</li>
+<li>L&#39;adresse de passerelle par défaut est l&#39;adresse IP d&#39;un switch sur un réseau distant.</li>
+<li>L&#39;adresse de passerelle par défaut est l&#39;adresse IP du routeur sur le réseau local.</li>
+</ul>
+<ol type="1" start="3">
+<li>Quelle ligne de commande peuvent être entrées sur un hôte Windows pour afficher sa table de routage ?</li>
+</ol>
+<ol type="1" start="4">
+<li>Quelle ligne de commande permet de tester la pile TCP/IP sur un PC ?</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Création de la topologie sous Packet tracer" duration="0">
+        <h2 is-upgraded><strong>Contexte/scénario</strong></h2>
+<p>Le réseau Packet tracer que nous allons créer nécessite des routes statiques pour fournir un accès Internet aux utilisateurs d&#39;un LAN. Pour cela on passera par l&#39;intermédiaire de routeurs de FAI. </p>
+<ol type="1" start="5">
+<li>Quel est l&#39;acronyme de FAI ? Donner 2 exemples de FAI en France.</li>
+</ol>
+<h2 is-upgraded><strong>Rappels Packet Tracer</strong></h2>
+<aside class="special"><p>Sur PT (Packet Tracer) on peut afficher les interfaces de connexion pour cela aller dans : </p>
+<p><em>Options&gt;Préférences&gt;cocher la case &#34;Always Show Port Labels in Logical Workspace&#34;</em></p>
+<p>De même, on peut masquer le modèle des équipements afin de gagner en lisibilité. Pour cela aller dans : </p>
+<p><em>Options&gt;Préférences&gt;décocher la case &#34;Show Device Model Labels&#34;</em></p>
+</aside>
+<h2 is-upgraded><strong>Positionnement des équipements</strong></h2>
+<p>Voici les équipement à votre disposition : </p>
+<ul>
+<li>PC</li>
+<li>Switch 2960</li>
+<li>Router 1941</li>
+<li>Server</li>
+</ul>
+<p>Sous Packet Tracer, créer la topologie suivante : </p>
+<p class="image-container"><img style="width: 624.00px" src="img\\d48fe9435e9512cc.png"></p>
+<aside class="special"><p><em>Pour agrandir des images vous pouvez faire : clic droit sur l&#39;image&gt;Ouvrir l&#39;image dans un nouvel onglet </em></p>
+</aside>
+<h2 is-upgraded><strong>Ajout d&#39;un module supplémentaire</strong></h2>
+<ol type="1" start="6">
+<li>Est-il possible de relier par câble le Router0 avec FAI 1 ? Quel module doit-on ajouter aux routeurs pour les relier par câble serial DCE ?</li>
+</ol>
+<p class="image-container"><img style="width: 624.00px" src="img\\5edf8fdae1d9776b.png"></p>
+<p>Ajouter le module correspondant puis finaliser la topologie en respectant le schéma ci-dessous : </p>
+<p class="image-container"><img style="width: 624.00px" src="img\\591cfe9f6daacf30.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Adressage IP" duration="0">
+        <p>Voici la configuration IP pour notre topologie.</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p><strong>Appareil</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>Interface</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>Adresse IP / Préfixe</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="4"><p>Router0</p>
+</td><td colspan="1" rowspan="1"><p>S0/0/0</p>
+</td><td colspan="1" rowspan="1"><p>10.10.10.254/24</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>S0/0/1</p>
+</td><td colspan="1" rowspan="1"><p>10.10.11.254/24</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>G0/0 </p>
+</td><td colspan="1" rowspan="1"><p>192.160.255.254/16</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>G0/1</p>
+</td><td colspan="1" rowspan="1"><p>192.168.11.254/24</p>
+</td></tr>
+<tr><td colspan="1" rowspan="2"><p>FAI1</p>
+</td><td colspan="1" rowspan="1"><p>S0/0/0</p>
+</td><td colspan="1" rowspan="1"><p>10.10.10.253/24</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>G0/0 </p>
+</td><td colspan="1" rowspan="1"><p>198.0.0.254/24</p>
+</td></tr>
+<tr><td colspan="1" rowspan="2"><p>FAI2</p>
+</td><td colspan="1" rowspan="1"><p>S0/0/1 </p>
+</td><td colspan="1" rowspan="1"><p>10.10.11.253/24 </p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>G0/0 </p>
+</td><td colspan="1" rowspan="1"><p>198.0.0.253/24</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>PC0</p>
+</td><td colspan="1" rowspan="1"><p>Carte réseau </p>
+</td><td colspan="1" rowspan="1"><p>192.160.0.1/16</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>PC1</p>
+</td><td colspan="1" rowspan="1"><p>Carte réseau </p>
+</td><td colspan="1" rowspan="1"><p>192.168.11.1/24</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Server0</p>
+</td><td colspan="1" rowspan="1"><p>Carte réseau </p>
+</td><td colspan="1" rowspan="1"><p>198.0.0.1/24</p>
+</td></tr>
+</table>
+<ol type="1" start="7">
+<li>Quelle est l&#39;adresse IP de PC0 ?</li>
+<li>Quel est le masque de sous-réseau de PC0 ? Comment se nomme cette notation ? En quoi consiste-t-elle ?</li>
+<li>Écrire le masque de PC0 en notation décimale (par exemple : 255.255.255.0 pour un masque en /24).</li>
+<li>Recopier puis compléter le tableau suivant : </li>
+</ol>
+<table>
+<tr><td colspan="1" rowspan="1"><p><strong>Masque en notation CIDR</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>Masque en notation décimale</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>/24</p>
+</td><td colspan="1" rowspan="1"></td></tr>
+<tr><td colspan="1" rowspan="1"><p>/16</p>
+</td><td colspan="1" rowspan="1"></td></tr>
+</table>
+<p>Configurer tous les équipements de votre topologie afin qu&#39;ils respectent le tableau d&#39;adressage précédent.        </p>
+<p>Enfin placer des notes pour indiquer les différents réseaux : </p>
+<p class="image-container"><img style="width: 624.00px" src="img\\24eee43f0d4f7133.png"></p>
+<aside class="special"><p>Pour mettre le texte d&#39;une note en gras, ajouter les balises &lt;b&gt;....&lt;/b&gt;</p>
+<p class="image-container"><img style="width: 152.00px" src="img\\781bc5828ea66f5d.png"></p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Table de routage" duration="0">
+        <ol type="1" start="11">
+<li>Rappeler la définition d&#39;une table de routage</li>
+</ol>
+<p>Cliquer sur FAI2 puis afficher sa table de routage avec la commande : </p>
+<pre>Router#show ip route</pre>
+<p class="image-container"><img style="width: 562.00px" src="img\\5e6f1dc3adf34352.png"></p>
+<p>Au début de chaque entrée de table de routage se trouve un code qui est utilisé pour identifier le type d&#39;itinéraire (ou comment l&#39;itinéraire a été appris). Les codes sont les suivantes :</p>
+<ul>
+<li><strong>L</strong> - Adresse IP de l&#39;interface <strong>locale </strong>directement connectée</li>
+<li><strong>C </strong>–Réseau <strong>directement connecté</strong></li>
+<li><strong>S </strong>— La route <strong>statique </strong>a été configurée manuellement par un administrateur</li>
+<li><strong>O </strong>- OSPF : la route a étée apprise via le protocole de routage dynamique OSPF</li>
+<li><strong>D </strong>- EIGRP : la route a étée apprise via le protocole de routage dynamique EIGRP</li>
+</ul>
+<p>Lorsqu&#39;une interface de routeur est configurée (avec les commandes : ip addresse ... + no shutdown), le routeur ajoute deux entrées de route : </p>
+<ul>
+<li>Une route avec le code C = le réseau <strong>connecté</strong></li>
+<li>Une route avec le code L = l&#39;adresse IP de l&#39;<strong>interface locale </strong>du réseau connecté.</li>
+</ul>
+<ol type="1" start="12">
+<li>Quels sont les 2 réseaux directement connectés sur FAI2 ? Quelle est l&#39;@IP de l&#39;interface locale de chaque réseau connecté ?</li>
+</ol>
+<ol type="1" start="13">
+<li>Sur Router0, quelle commande permet d&#39;afficher l&#39;@IP de l&#39;interface local sur laquelle le réseau 192.168.11.0/24 est connecté ? Quelle est cette @IP ?</li>
+</ol>
+<p>Aucun des routeurs n&#39;a connaissance des réseaux distants, ceux au-delà des interfaces connectées directement. Cela signifie que pour l&#39;instant chaque routeur ne peut atteindre que des réseaux directement connectés.</p>
+<p>Faire un ping entre Router0 et FAI2. Ce ping devrait fonctionner.</p>
+<ol type="1" start="14">
+<li>Faire un ping entre Router0 et Server0. Pourquoi ce ping ne fonctionne pas ?</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Route statique" duration="0">
+        <ol type="1" start="15">
+<li>En utilisant le cours, quelle ligne de commande doit-on taper sur Router0 afin d&#39;ajouter une nouvelle route statique vers le réseau 198.0.0.0/24 ?</li>
+</ol>
+<ol type="1" start="16">
+<li>Observer la table de routage de Router0. Quelle nouvelle route a été ajoutée ? Quel est le code de cette route ?</li>
+</ol>
+<p>Faire plusieurs ping de Router0 vers Serveur0. Ces ping devraient fonctionner.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Route statique par défaut" duration="0">
+        <p>Une route par défaut est une route statique qui correspond à tous les paquets. Plutôt que de stocker des routes pour tous les réseaux sur internet, les routeurs peuvent stocker une seule route par défaut pour représenter n&#39;importe quel réseau absent de la table de routage.</p>
+<p>Une route par défaut est utilisée alors qu&#39;aucune autre route de la table de routage ne correspond à l&#39;adresse IP de destination du paquet. En d&#39;autres termes, si une correspondance plus spécifique n&#39;existe pas, la route par défaut est utilisée comme passerelle de dernier recours.</p>
+<p>Les routes statiques par défaut sont couramment utilisées lors de la connexion d&#39;un routeur périphérique à un réseau de fournisseur de services, ou d&#39;un routeur d&#39;extrémité (un routeur avec un seul routeur voisin en amont).</p>
+<p class="image-container"><img style="width: 624.00px" src="img\\8f9197a0142dfbc0.png"></p>
+<p>La syntaxe de commande pour une route statique par défaut est similaire à toute autre route statique, à l&#39;exception que l&#39;adresse réseau est <strong>0.0.0.0</strong> et que le masque de sous-réseau est <strong>0.0.0.0</strong>. La 0.0.0.0 0.0.0.0 de la route correspond à n&#39;importe quelle adresse réseau.</p>
+<p><em>Remarque: Une route statique par défaut d&#39;IPv4 est généralement appelée route quad-zéro</em></p>
+<p>La syntaxe de commande de base pour une route statique par défaut d&#39;IPv4 est la suivante :</p>
+<pre>Router(config)# ip route 0.0.0.0 0.0.0.0 {ip-address}</pre>
+<p><em>ip-address est l&#39;adresse du routeur de saut suivant.</em></p>
+<h2 is-upgraded><strong>Manipulation</strong></h2>
+<p class="image-container"><img style="width: 624.00px" src="img\\e69f3a010fd49590.png"></p>
+<ol type="1" start="17">
+<li>Sur router0, quelle commande permet de configurer une route statique par défaut vers FAI1 ?</li>
+</ol>
+<p>Remarquer la nouvelle route dans votre table de routage</p>
+<p class="image-container"><img style="width: 572.00px" src="img\\a15b0431a2c45878.png"></p>
+<ol type="1" start="18">
+<li>Quel symbole indique que cette ligne est une route par défaut ?</li>
+</ol>
+<p>Notez que la configuration statique des routes par défaut utilise le masque /0. Souvenez-vous que le masque dans une table de routage détermine le nombre de bits devant correspondre entre l&#39;adresse IP de destination du paquet et la route dans la table de routage.</p>
+<p>Un masque /0 indique qu&#39;aucun des bits ne doit correspondre. Tant qu&#39;il n&#39;y a pas de correspondance plus spécifique, la route statique par défaut correspond à tous les paquets.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Ping PC0 et Server0" duration="0">
+        <p>Faire un ping de PC0 vers Server0.</p>
+<p>D&#39;après-vous pourquoi ce ping ne fonctionne pas ?</p>
+<p>Nous allons utiliser le mode simulation afin de comprendre pourquoi ce ping ne fonctionne pas.</p>
+<ul>
+<li>Placez vous en mode simulation.</li>
+<li>Editer les filtres pour ne garder que le protocole &#34;ICMP&#34;</li>
+<li>Supprimer tous les évènements en cours (si il y en avait) en cliquant sur &#34;Delete&#34;</li>
+</ul>
+<p class="image-container"><img style="width: 624.00px" src="img\\d09f17fa579fa0f1.png"></p>
+<p>Nous allons envoyer un message de PC0 vers Server0. Pour cela cliquer sur l&#39;icône de l&#39;enveloppe (en haut à gauche) puis cliquer sur PC0 puis Server0</p>
+<p class="image-container"><img style="width: 624.00px" src="img\\cd52bfb74e259279.png"></p>
+<p>Cliquer plusieurs fois sur le bouton play afin de visualiser le parcours du paquet : </p>
+<p class="image-container"><img style="width: 624.00px" src="img\\a39eebd723630040.png"></p>
+<ol type="1" start="19">
+<li>Pourquoi le ping entre PC0 et Server0 ne fonctionne pas ? </li>
+</ol>
+<p>Faire les manipulations nécessaires pour que ce ping fonctionne.</p>
+<p>De nouveau passer en mode simulation pour vérifier le bon fonctionnement.</p>
+<p>Faire un ping entre PC0 et PC1.</p>
+<ol type="1" start="20">
+<li>Pourquoi ce ping fonctionne alors que nous n&#39;avons configuré aucune route statique entre ces réseaux sur Router0 ?</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Modification de la topologie" duration="0">
+        <p>Supposons que le lien entre Router0 et FAI1 n&#39;est plus disponible à cause d&#39;un problème technique.</p>
+<p>Supprimer ce lien dans votre topologie : </p>
+<p class="image-container"><img style="width: 624.00px" src="img\\5c84f9de7db7b130.png"></p>
+<p>Le ping entre PC0 et Server0 fonctionne-t-il toujours ?</p>
+<p>Faire les manipulations nécessaires pour que PC0 et Server0 communiquent ensemble.</p>
+<ol type="1" start="21">
+<li>Dans votre topologie, quels équipements se trouvent dans un réseau d&#39;extrémité ? </li>
+<li>Quel est le nom du routeur d&#39;extrémité ?</li>
+<li>En ce qui concerne le routage du routeur d&#39;extrémité, d&#39;après-vous est-il plus efficace de créer une route statique pour chaque réseau distant ou bien une route statique par défaut ? Expliquez votre réponse.</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
